@@ -1,0 +1,57 @@
+PROCEDURE dot_product(Var v1 , v2 : array_of float ; Var ps : float)
+VAR
+    i : integer;
+    
+Begin
+    ps := 0 ;
+
+    if (v1.length <> v2.length) then
+        Write ("Les tailles de v1 et v2 ne correspondent pas , Nous ne pouvons pas calculer le produit scalaire")
+    End_if
+
+    for i from 0 TO v1.length -1 do
+        ps := ps + v1[i]*v2[i]
+    End_for
+End
+
+FUNCTION read_size() : integer
+Var
+    n : integer;
+Begin
+    repeat
+        Read (n);
+    until (n > 0 AND n <= 30)
+    return n ;
+End
+
+PROCEDURE read_vect (n : integer , Var v : array_of float)
+Var
+    i : integer;
+Begin
+    for i from 0 to n-1 do
+        Read v[i];
+    End_for
+End
+
+
+ALGORITHM vector_orthogonal
+Var
+    v1 : array_of float [30];
+    v2 : array_of float [30];
+    n1 , n2 : integer;
+    ps : float;
+Begin
+    n1 := read_size();
+    read_vect (n1 , v1);
+
+    n2 := read_size();
+    read_vect (n2 , v2);
+
+    dot_product(v1, v2 , ps);
+
+    if (ps = 0) then
+        Write ( "v1 et v2 sont orthogonaux");
+    else
+        Write ( "v1 et v2 ne sont pas orthogonaux");
+    End_if
+End
